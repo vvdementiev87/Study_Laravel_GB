@@ -10,7 +10,7 @@
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
-        
+
 
         <style>
             body {
@@ -21,8 +21,8 @@
     <body class="antialiased">
         <div><h1>Info page</h1></div>
         <div><li>
-            <ul><a href="/">Main</a></ul>
-            <ul><a href="/news">News</a></ul>
+            <ul><a href="<?=route('main') ?>">Main</a></ul>
+            <ul><a href="<?=route('news') ?>">News</a></ul>
         </li></div>
     </body>
 </html>
