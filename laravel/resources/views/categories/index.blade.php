@@ -47,17 +47,14 @@
 </head>
 <body class="antialiased">
 <div class="container">
-    <div class="header"><h1>Welcome page</h1></div>
+    <div class="header"><h1>Categories page</h1></div>
     <div class="wrap">
         <li>
-            <ul><h3>Links</h3></ul>
-            <ul><a href="<?=route('info') ?>">Info</a></ul>
-            <ul><a href="<?=route('news') ?>">News</a></ul>
-            <ul><a href="<?=route('categories') ?>">Categories</a></ul>
+            <ul><h3>Categories</h3></ul>
+            @foreach($categories as $category)
+                <ul><a href="{{route('categories.show',['id'=>$category['id']])}} ">{{$category['name']}} </a></ul>
+            @endforeach
         </li>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dignissimos hic laudantium maxime
-            mollitia necessitatibus officiis qui quisquam ullam voluptates. Aliquam assumenda corporis distinctio est
-            itaque libero magnam quidem voluptate!</p>
     </div>
 </div>
 </body>

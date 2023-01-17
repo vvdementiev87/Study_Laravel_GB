@@ -43,22 +43,36 @@
             display: flex;
             justify-content: center;
         }
+
+        .news {
+            margin-left: 20px;
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body class="antialiased">
 <div class="container">
-    <div class="header"><h1>Welcome page</h1></div>
+    <div class="header"><h1>All news page</h1></div>
     <div class="wrap">
-        <li>
-            <ul><h3>Links</h3></ul>
-            <ul><a href="<?=route('info') ?>">Info</a></ul>
-            <ul><a href="<?=route('news') ?>">News</a></ul>
-            <ul><a href="<?=route('categories') ?>">Categories</a></ul>
-        </li>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dignissimos hic laudantium maxime
-            mollitia necessitatibus officiis qui quisquam ullam voluptates. Aliquam assumenda corporis distinctio est
-            itaque libero magnam quidem voluptate!</p>
+        <h3>News</h3>
+        <div class="news">
+            @foreach($news as $n)
+            <div style="border: 1px solid grey; width: 100%; margin-bottom: 10px">
+                <h2><?= $n['title'] ?></h2>
+                <p><?= $n['description'] ?></p>
+                <div><strong><?= $n['author'] ?>(<?= $n['created_at'] ?>)</strong>
+                    <a href="<?=route('news.show', ['id'=>$n['id']]) ?>">Read more</a>
+                </div>
+            </div>
+
+            @endforeach
+        </div>
     </div>
 </div>
 </body>
 </html>
+
