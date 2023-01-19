@@ -20,7 +20,7 @@ trait NewsTrait
                     'id' => $i,
                     'category' => $categoriesNews[\fake()->numberBetween(1, \count($categoriesNews))],
                     'title' => \fake()->jobTitle(),
-                    'description' => \fake()->text(100),
+                    'description' => \fake()->text(300),
                     'author' => \fake()->userName(),
                     'created_at' => \now()->format('d-m-Y-H-i')
                 ];

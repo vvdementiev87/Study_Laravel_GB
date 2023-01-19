@@ -1,74 +1,45 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.main')
+@section('categories')
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 link-secondary" href="#">World</a>
+            <a class="p-2 link-secondary" href="#">U.S.</a>
+            <a class="p-2 link-secondary" href="#">Technology</a>
+            <a class="p-2 link-secondary" href="#">Design</a>
+            <a class="p-2 link-secondary" href="#">Culture</a>
+            <a class="p-2 link-secondary" href="#">Business</a>
+            <a class="p-2 link-secondary" href="#">Politics</a>
+            <a class="p-2 link-secondary" href="#">Opinion</a>
+            <a class="p-2 link-secondary" href="#">Science</a>
+            <a class="p-2 link-secondary" href="#">Health</a>
+            <a class="p-2 link-secondary" href="#">Style</a>
+            <a class="p-2 link-secondary" href="#">Travel</a>
+        </nav>
+    </div>
+@endsection
+@section('content')
+    <div class="row g-5">
+        <div class="col-md-8">
+            <h3 class="pb-4 mb-4 fst-italic border-bottom">
+                From the Firehose
+            </h3>
+            <article class="blog-post">
+                <h2 class="blog-post-title mb-1">{{$news['title']}}</h2>
+                <p class="blog-post-meta">{{$news['created_at']}} by <a href="#">{{$news['author']}}</a></p>
 
-    <title>News</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .container {
-            margin: 0 auto;
-            max-width: 1024px;
-
-        }
-
-        li {
-            list-style-type: none;
-            padding: 0 30px 0 0;
-        }
-
-        .wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .header {
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .news {
-            margin-left: 20px;
-            width: 100%;
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-    </style>
-</head>
-<body class="antialiased">
-<div class="container">
-    <div class="header"><h1>News page</h1></div>
-    <div class="wrap">
-        <h3><a href="<?=route('main') ?>">Main</a></h3>
-        <div class="news">
-            <div style="border: 1px solid grey; width: 100%; margin-bottom: 10px">
-                <h2><?= $news['title'] ?></h2>
-                <p><?= $news['description'] ?></p>
-                <div><strong><?= $news['author'] ?>(<?= $news['created_at'] ?>)</strong>
+                <p>{{$news['description']}}</p>
+            </article>
+        </div>
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 2rem;">
+                <div class="p-4 mb-3 bg-light rounded">
+                    <h4 class="fst-italic">About</h4>
+                    <p class="mb-0">Customize this section to tell your visitors a little bit about your publication,
+                        writers, content, or something else entirely. Totally up to you.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</body>
-</html>
+@endsection
+
 

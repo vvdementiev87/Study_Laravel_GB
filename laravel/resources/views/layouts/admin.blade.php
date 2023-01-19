@@ -1,10 +1,14 @@
 <!doctype html>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome page</title>
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" crossorigin="anonymous">
+    <title>@section('title')
+            - News Portal
+        @show</title>
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" crossorigin="anonymous">
+    <!-- Favicons -->
+
     <meta name="theme-color" content="#712cf9">
     <style>
         .bd-placeholder-img {
@@ -59,37 +63,30 @@
         }
     </style>
 
+
     <!-- Custom styles for this template -->
-    <link href="{{asset('assets/css/cover.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
 </head>
-<body class="d-flex h-100 text-center text-bg-dark">
+<body>
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-        <div>
-            <h3 class="float-md-start mb-0">Новостной портал</h3>
-            <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories') }}">Categories</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{route('admin.index') }}">Admin panel</a>
-            </nav>
-        </div>
-    </header>
+<x-admin.header></x-admin.header>
 
-    <main class="px-3">
-        <h1>News Portal</h1>
-        <p class="lead">Welcome on news portal</p>
-        <p class="lead">
-            <a href="{{route('news') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">read news</a>
-        </p>
-    </main>
-
-    <footer class="mt-auto text-white-50">
-        <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
-                href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-    </footer>
+<div class="container-fluid">
+    <div class="row">
+        <x-admin.sidebar></x-admin.sidebar>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            @yield('content')
+        </main>
+    </div>
 </div>
 
 
+<script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+</script>
+
 </body>
 </html>
+

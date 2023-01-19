@@ -1,78 +1,40 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>News</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-
-        .container {
-            margin: 0 auto;
-            max-width: 1024px;
-
-        }
-
-        li {
-            list-style-type: none;
-            padding: 0 30px 0 0;
-        }
-
-        .wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .header {
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .news {
-            margin-left: 20px;
-            width: 100%;
-            padding: 20px 0;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-    </style>
-</head>
-<body class="antialiased">
-<div class="container">
-    <div class="header"><h1>Category page</h1></div>
-    <div class="wrap">
-        <h3>Category: {{$category['name']}}</h3>
-        <div class="news">
-            @foreach($news as $n)
-                @if($n['category']['id']===$category['id'])
-                    <div style="border: 1px solid grey; width: 100%; margin-bottom: 10px">
-                        <h2><?= $n['title'] ?></h2>
-                        <p><?= $n['description'] ?></p>
-                        <div><strong><?= $n['author'] ?>(<?= $n['created_at'] ?>)</strong>
-                            <a href="<?=route('news.show', ['id'=>$n['id']]) ?>">Read more</a>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
+@extends('layouts.main')
+@section('categories')
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+                <a class="p-2 link-secondary" href="#">{{$category['name']}}</a>
+        </nav>
     </div>
-</div>
-</body>
-</html>
+@endsection
+@section('content')
+    <div class="row mb-2">
+        @foreach($news as $n)
+            @if($n['category']['id']===$category['id'])
+            <div class="col-md-6">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-300 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-success">{{$n['category']['name']}}</strong>
+                        <h3 class="mb-0">{{$n['title']}}</h3>
+                        <div class="mb-1 d-flex justify-content-between text-muted">
+                            <div class="text-muted">{{$n['author']}}</div>&#9679
+                            <div class="text-muted">{{$n['created_at']}}</div>
+                        </div>
+                        <p class="mb-auto">{{$n['description']}}</p>
+                        <a href="{{route('news.show', ['id'=>$n['id']])}}" class="stretched-link">Продолжение ...</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <svg class="bd-placeholder-img" width="200" height="300" xmlns="http://www.w3.org/2000/svg"
+                             role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
+                             focusable="false"><title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#55595c"/>
+                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            @endif
+        @endforeach
+    </div>
+@endsection
+
+
