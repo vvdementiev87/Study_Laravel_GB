@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en" class="h-100">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome page</title>
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" crossorigin="anonymous">
+    <meta name="generator" content="Hugo 0.108.0">
+    <title>Blog Template · Bootstrap v5.3</title>
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" crossorigin="anonymous">
     <meta name="theme-color" content="#712cf9">
     <style>
         .bd-placeholder-img {
@@ -58,38 +59,24 @@
             -webkit-overflow-scrolling: touch;
         }
     </style>
-
     <!-- Custom styles for this template -->
-    <link href="{{asset('assets/css/cover.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">
 </head>
-<body class="d-flex h-100 text-center text-bg-dark">
+<body>
+<div class="container">
+    <x-header></x-header>
 
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-        <div>
-            <h3 class="float-md-start mb-0">Новостной портал</h3>
-            <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories') }}">Categories</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{route('admin.index') }}">Admin panel</a>
-            </nav>
-        </div>
-    </header>
+@yield('categories')
 
-    <main class="px-3">
-        <h1>News Portal</h1>
-        <p class="lead">Welcome on news portal</p>
-        <p class="lead">
-            <a href="{{route('news') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">read news</a>
-        </p>
-    </main>
-
-    <footer class="mt-auto text-white-50">
-        <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
-                href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-    </footer>
 </div>
+<main class="container">
 
+    @yield('content')
 
+</main>
+<x-footer text="Новостной портал"></x-footer>
 </body>
 </html>
+
