@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome page</title>
+    <title>FeedbackPage</title>
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" crossorigin="anonymous">
     <meta name="theme-color" content="#712cf9">
     <style>
@@ -77,23 +77,15 @@
     </header>
 
     <main class="px-3">
-        <h1>News Portal</h1>
-        <p class="lead">Welcome on news portal</p>
+        <h1>Leave feedback</h1>
         <p class="lead">
-            <a href="{{route('news') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">read news</a>
+            <a href="{{route('feedback.create') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">leave feedback</a>
         </p>
     </main>
 
     <footer class="mt-auto text-white-50">
         <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
                 href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-        <p class="lead">
-            <a href="{{route('feedback.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">leave
-                feedback</a>
-        </p>
-        <p class="lead">
-            <a href="{{route('order.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">make order</a>
-        </p>
     </footer>
 </div>
 

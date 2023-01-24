@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome page</title>
+    <title>Order Page</title>
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" crossorigin="anonymous">
     <meta name="theme-color" content="#712cf9">
     <style>
@@ -77,23 +77,40 @@
     </header>
 
     <main class="px-3">
-        <h1>News Portal</h1>
-        <p class="lead">Welcome on news portal</p>
-        <p class="lead">
-            <a href="{{route('news') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">read news</a>
-        </p>
+        <h1>Заказ</h1>
+        <div>
+            @if($errors->any())
+                @foreach($errors->all() as $error)
+                    <x-alert type="danger" :message=" $error "></x-alert>
+                @endforeach
+            @endif
+            <form method="post" action="{{route('order.store')}}">
+                @csrf
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" value="{{old('phone')}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="info">Запрос</label>
+                    <textarea class="form-control" id="info" name="info">{{old('info')}}</textarea>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Отправить</button>
+            </form>
+        </div>
     </main>
 
     <footer class="mt-auto text-white-50">
         <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
                 href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-        <p class="lead">
-            <a href="{{route('feedback.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">leave
-                feedback</a>
-        </p>
-        <p class="lead">
-            <a href="{{route('order.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">make order</a>
-        </p>
     </footer>
 </div>
 
