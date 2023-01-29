@@ -39,9 +39,7 @@ class FeedbackController extends Controller
             'author'=>'required',
             'feedback'=>'required'
         ]);
-        $file = 'feedback/'.fake()->uuid().'feedback.txt';
-        $message = 'author: '.$request->input('author').PHP_EOL.'feedback: '.$request->input('feedback').PHP_EOL;
-        file_put_contents($file, $message, FILE_APPEND);
+
         return  response()->json($request->only(['author','feedback']));
     }
 }

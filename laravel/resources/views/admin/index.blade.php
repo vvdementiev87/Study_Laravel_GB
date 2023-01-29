@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-@section('title') Main admin page @parent @stop
+@section('title')
+    Main admin page @parent
+@stop
 @section('content')
     <div
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -12,7 +14,5 @@
 
         </div>
     </div>
-    <div class="table-responsive">
-<x-alert type="danger" message="Error"></x-alert>
-    </div>
+
 @endsection
