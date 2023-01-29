@@ -23,14 +23,14 @@
             <div class="col-md-6">
                 <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-300 position-relative">
                     <div class="col p-4 d-flex flex-column position-static">
-                        <strong class="d-inline-block mb-2 text-success">{{$n['category']['name']}}</strong>
-                        <h3 class="mb-0">{{$n['title']}}</h3>
+                        <strong class="d-inline-block mb-2 text-success">Category</strong>
+                        <h3 class="mb-0">{{$n->title}}</h3>
                         <div class="mb-1 d-flex justify-content-between text-muted">
-                            <div class="text-muted">{{$n['author']}}</div>&#9679
-                        <div class="text-muted">{{$n['created_at']}}</div>
+                            <div class="text-muted">{{$n->author}}</div>&#9679
+                        <div class="text-muted">{{$n->created_at}}</div>
                         </div>
-                        <p class="mb-auto">{{$n['description']}}</p>
-                        <a href="{{route('news.show', ['id'=>$n['id']])}}" class="stretched-link">Продолжение ...</a>
+                        <p class="mb-auto">{{$n->description}}</p>
+                        <a href="{{route('news.show', ['id'=>$n->id])}}" class="stretched-link">Продолжение ...</a>
                     </div>
                     <div class="col-auto d-none d-lg-block">
                         <svg class="bd-placeholder-img" width="200" height="300" xmlns="http://www.w3.org/2000/svg"

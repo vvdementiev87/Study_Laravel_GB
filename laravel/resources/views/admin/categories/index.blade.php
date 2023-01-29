@@ -10,5 +10,33 @@
             Создать категорию
         </a>
     </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>CRUD</th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($categoriesList as $category)
+                <tr>
+                    <td>{{$category->id}}</td>
+                    <td>{{$category->title}}</td>
+                    <td>{{$category->description}}</td>
+                    <td>{{$category->created_at}}</td>
+                    <td>CRUD operations</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7">No records available</td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
+    </div>
 
 @endsection

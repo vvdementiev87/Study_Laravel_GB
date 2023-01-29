@@ -10,5 +10,36 @@
             Создать новость
         </a>
     </div>
-
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>CRUD</th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($newsList as $news)
+                <tr>
+                    <td>{{$news->id}}</td>
+                    <td>{{$news->title}}</td>
+                    <td>{{$news->description}}</td>
+                    <td>{{$news->author}}</td>
+                    <td>{{$news->status}}</td>
+                    <td>{{$news->created_at}}</td>
+                    <td>CRUD operations</td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7">No records available</td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
+    </div>
 @endsection

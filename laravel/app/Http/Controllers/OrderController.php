@@ -40,9 +40,7 @@ class OrderController extends Controller
             'email' => 'required',
             'info' => 'required',
         ]);
-        $file = 'order/' . fake()->uuid() . '_order.txt';
-        $message = 'name: ' . $request->input('name') . PHP_EOL . 'phone: ' . $request->input('phone') . PHP_EOL . 'email: ' . $request->input('email') . PHP_EOL . 'info: ' . $request->input('info') . PHP_EOL;
-        file_put_contents($file, $message, FILE_APPEND);
+
         return  response()->json($request->only(['name','phone', 'email','info']));
     }
 

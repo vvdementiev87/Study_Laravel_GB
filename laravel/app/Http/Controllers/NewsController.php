@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\NewsTrait;
+use App\Models\News;
 
 class NewsController extends Controller
 {
-    use NewsTrait;
+
     public function index()
     {
-        return \view('news.index', ['news'=> $this->getNews()]);
+        $model = new News();
+        $newsList = $model->getNews();
+        return \view('news.index', ['news' => $newsList]);
     }
 
-    public function show(int $id)
-    {
-        return \view('news.show', ['news'=> $this->getNews($id)]);
-    }
+        public
+        function show(int $id)
+        {
+            $model = new News();
+            $newsList = $model->getNewsById($id);
+
+
+        return \view('news.show', ['news' => $newsList]);
+        }
 }
