@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return \view('order.index');
+        return \view('orders.index');
     }
 
     /**
@@ -23,7 +25,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return \view('order.create');
+        return \view('orders.create');
     }
 
     /**
@@ -41,7 +43,13 @@ class OrderController extends Controller
             'info' => 'required',
         ]);
 
-        return  response()->json($request->only(['name','phone', 'email','info']));
+
+        $order = new Order($request->except('_token')); //News::create()
+        if ($order->save()) {
+            return redirect()->route('main')->with('success', 'Order successfully added.');
+        }
+
+        return \back()->with('error','Order not added.');
     }
 
     /**

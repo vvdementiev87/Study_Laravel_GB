@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Feedback Page</title>
+    <title>Order Page</title>
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" crossorigin="anonymous">
     <meta name="theme-color" content="#712cf9">
     <style>
@@ -77,25 +77,33 @@
     </header>
 
     <main class="px-3">
-        <h1>Отзыв</h1>
+        <h1>Заказ</h1>
         <div>
             @if($errors->any())
                 @foreach($errors->all() as $error)
                     <x-alert type="danger" :message=" $error "></x-alert>
                 @endforeach
             @endif
-            <form method="post" action="{{route('feedback.store')}}">
+            <form method="post" action="{{route('orders.store')}}">
                 @csrf
                 <div class="form-group">
-                    <label for="author">Автор</label>
-                    <input type="text" id="author" name="author" value="{{old('author')}}" class="form-control">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="feedback">Отзыв</label>
-                    <textarea class="form-control" id="feedback" name="feedback">{{old('feedback')}}</textarea>
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" value="{{old('phone')}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="info">Запрос</label>
+                    <textarea class="form-control" id="info" name="info">{{old('info')}}</textarea>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-success">Оставить отзыв</button>
+                <button type="submit" class="btn btn-success">Отправить</button>
             </form>
         </div>
     </main>

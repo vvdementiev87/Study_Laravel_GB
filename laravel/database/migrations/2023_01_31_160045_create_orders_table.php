@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\NewsSource;
 
 return new class extends Migration
 {
@@ -14,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sources', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);
-            $table->string('source_url',255);
+            $table->string('phone',255);
+            $table->string('email',255);
+            $table->string('info',255);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sources');
+        Schema::dropIfExists('orders');
     }
 };

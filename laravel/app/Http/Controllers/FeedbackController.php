@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class FeedbackController extends Controller
      */
     public function index():View
     {
-        return \view('feedback.index');
+        return \view('feedbacks.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class FeedbackController extends Controller
      */
     public function create():View
     {
-        return \view('feedback.create');
+        return \view('feedbacks.create');
     }
 
     /**
@@ -40,6 +41,11 @@ class FeedbackController extends Controller
             'feedback'=>'required'
         ]);
 
-        return  response()->json($request->only(['author','feedback']));
+        $feedback = new Feedback($request->except('_token')); //News::create()
+        if ($feedback->save()) {
+            return redirect()->route('main')->with('success', 'Feedback successfully added.');
+        }
+
+        return \back()->with('error','Feedback not added.');
     }
 }

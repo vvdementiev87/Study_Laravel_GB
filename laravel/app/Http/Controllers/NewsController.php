@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
+
+use App\QueryBuilders\NewsQueryBuilder;
 
 class NewsController extends Controller
 {
 
-    public function index()
+    public function index(NewsQueryBuilder $newsQueryBuilder)
     {
-        $model = new News();
-        $newsList = $model->getNews();
-        return \view('news.index', ['news' => $newsList]);
+
+        return \view('news.index',
+            [
+                'news' => $newsQueryBuilder->getNewsAllWithPagination()
+            ]);
     }
 
-        public
-        function show(int $id)
-        {
-            $model = new News();
-            $newsList = $model->getNewsById($id);
-
-
+    public
+    function show(int $id, NewsQueryBuilder $newsQueryBuilder)
+    {
+        $newsList = $newsQueryBuilder->getNewsById($id);
         return \view('news.show', ['news' => $newsList]);
-        }
+    }
 }

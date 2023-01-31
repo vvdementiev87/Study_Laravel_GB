@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\QueryBuilders\CategoriesQueryBuilder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
@@ -13,11 +16,10 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoriesQueryBuilder $categoriesQueryBuilder)
     {
-        $model=new Category();
-        $categoriesList = $model->getCategories();
-        return \view('admin.categories.index',['categoriesList'=>$categoriesList]);
+
+        return \view('admin.categories.index', ['categoriesList' => $categoriesQueryBuilder->getCategoriesAll()]);
     }
 
     /**
@@ -33,21 +35,21 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'required',
+            'name' => 'required',
         ]);
-        return  response()->json($request->only(['name']));
+        return response()->json($request->only(['name']));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -58,30 +60,38 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category):View
     {
-        //
+        return \view('admin.categories.edit',
+            [
+                'category' => $category,
+            ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category): RedirectResponse
     {
-        //
+        $category = $category->fill($request->except('_token'));
+        if ($category->save()) {
+            return redirect()->route('admin.categories.index')->with('success', 'News successfully updated.');
+        }
+
+        return \back()->with('error', 'News not added.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -20,6 +20,24 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.sources.*')) active @endif" href="{{route('admin.sources.index')}}">
+                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                    Источники
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.feedbacks.*')) active @endif" href="{{route('admin.feedbacks.index')}}">
+                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                    Отзывы
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->routeIs('admin.orders.*')) active @endif" href="{{route('admin.orders.index')}}">
+                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                    Запросы
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="users" class="align-text-bottom"></span>
                     Пользователи

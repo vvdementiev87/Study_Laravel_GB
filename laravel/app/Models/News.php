@@ -4,20 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class News extends Model
 {
     use HasFactory;
 
-    public function getNews()
-    {
-        return DB::table('news')->orderBy('id')
-            ->get();;
-    }
+    protected $fillable = [
+        'title',
+        'author',
+        'status',
+        'description',
+        'source_id'
+    ];
 
-    public function getNewsById(int $id)
+    public function categories(): BelongsToMany
     {
-        return DB::table('news')->find($id);
+        return $this->belongsToMany(Category::class,'category_has_news','news_id','category_id', 'id', 'id' );
     }
 }

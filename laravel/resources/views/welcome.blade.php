@@ -88,11 +88,11 @@
         <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a
                 href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
         <p class="lead">
-            <a href="{{route('feedback.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">leave
+            <a href="{{route('feedbacks.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">leave
                 feedback</a>
         </p>
         <p class="lead">
-            <a href="{{route('order.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">make order</a>
+            <a href="{{route('orders.create') }}" class="btn btn-sm btn-light fw-bold border-white bg-white">make order</a>
         </p>
     </footer>
 </div>
