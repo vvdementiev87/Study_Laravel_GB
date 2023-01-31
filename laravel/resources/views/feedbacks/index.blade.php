@@ -79,7 +79,7 @@
     <main class="px-3">
         <h1>Leave feedback</h1>
         <p class="lead">
-            <a href="{{route('feedback.create') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">leave feedback</a>
+            <a href="{{route('feedbacks.create') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">leave feedback</a>
         </p>
     </main>
 

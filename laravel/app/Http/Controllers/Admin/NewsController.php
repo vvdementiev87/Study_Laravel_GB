@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\NewsStatus;
 use App\Http\Controllers\Controller;
 use App\Models\News;
+use App\QueryBuilders\CategoriesQueryBuilder;
+use App\QueryBuilders\NewsQueryBuilder;
+use App\QueryBuilders\SourcesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class NewsController extends Controller
 {
@@ -14,11 +20,9 @@ class NewsController extends Controller
      *
      * @return View
      */
-    public function index():View
+    public function index(NewsQueryBuilder $newsQueryBuilder): View
     {
-        $model=new News();
-        $newsList = $model->getNews();
-        return \view('admin.news.index',['newsList'=>$newsList ]);
+        return \view('admin.news.index', ['newsList' => $newsQueryBuilder->getNewsAllWithPagination()]);
     }
 
     /**
@@ -26,29 +30,39 @@ class NewsController extends Controller
      *
      * @return View
      */
-    public function create():View
+    public function create(CategoriesQueryBuilder $categoriesQueryBuilder, SourcesQueryBuilder $sourcesQueryBuilder): View
     {
-        return \view('admin.news.create');
+        return \view('admin.news.create',
+            [
+                'categories' => $categoriesQueryBuilder->getCategoriesAll(),
+                'statuses' => NewsStatus::all(),
+                'sources'=>$sourcesQueryBuilder->getSourcesAll()
+            ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'title'=>'required',
+            'title' => 'required',
         ]);
-        return  response()->json($request->only(['title','author','description']));
+        $news = new News($request->except('_token','category_id')); //News::create()
+        if ($news->save()) {
+            return redirect()->route('admin.news.index')->with('success', 'News successfully added.');
+        }
+
+        return \back()->with('error','News not added.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,30 +73,44 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @param CategoriesQueryBuilder $categoriesQueryBuilder
+     * @param SourcesQueryBuilder $sourcesQueryBuilder
+     * @return Response
      */
-    public function edit($id)
+    public function edit(News $news, CategoriesQueryBuilder $categoriesQueryBuilder,SourcesQueryBuilder $sourcesQueryBuilder)
     {
-        //
+        return \view('admin.news.edit',
+            [
+                'news'=> $news,
+                'categories' => $categoriesQueryBuilder->getCategoriesAll(),
+                'statuses' => NewsStatus::all(),
+                'sources'=>$sourcesQueryBuilder->getSourcesAll()
+            ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news):RedirectResponse
     {
-        //
+        $news=$news->fill($request->except('_token','category_ids'));
+        if ($news->save()){
+            $news->categories()->sync((array) $request->input('category_ids'));
+            return redirect()->route('admin.news.index')->with('success', 'News successfully updated.');
+        }
+
+        return \back()->with('error','News not added.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

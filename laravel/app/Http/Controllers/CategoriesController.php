@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\News;
-use Illuminate\Http\Request;
+use App\QueryBuilders\CategoriesQueryBuilder;
+use App\QueryBuilders\NewsQueryBuilder;
+use Illuminate\View\View;
 
 class CategoriesController extends Controller
 {
-        public function index()
+    public function index(CategoriesQueryBuilder $categoriesQueryBuilder, NewsQueryBuilder $newsQueryBuilder): View
     {
-        $model=new Category();
-        $categoriesList = $model->getCategories();
-        return \view('categories.index', ['categories'=> $categoriesList]);
+        $categoriesList = $categoriesQueryBuilder->getCategoriesAll();
+        return \view('categories.index', ['categories' => $categoriesList]);
     }
 
-    public function show(int $id)
+    public function show(
+        int                    $id,
+        CategoriesQueryBuilder $categoriesQueryBuilder,
+        NewsQueryBuilder       $newsQueryBuilder)
     {
-        $model=new Category();
-        $modelNews=new News();
-        $categoriesList = $model->getCategoriesById($id);
-        return \view('categories.show', ['category'=> $categoriesList, 'news'=>$modelNews]);
+        $categoriesList = $categoriesQueryBuilder->getCategoriesById($id);
+        $newsList = $newsQueryBuilder->getNewsAll();
+        return \view('categories.show', ['category' => $categoriesList, 'news' => $newsList]);
     }
 }

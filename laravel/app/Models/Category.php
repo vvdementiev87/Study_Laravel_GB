@@ -10,13 +10,8 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function getCategories(): \Illuminate\Support\Collection
-    {
-        return DB::table('categories')->get();
-    }
-
-    public function getCategoriesById(int $id)
-    {
-        return DB::table('categories')->find($id);
-    }
+    protected $fillable = [
+        'title',
+        'description'
+    ];
 }
