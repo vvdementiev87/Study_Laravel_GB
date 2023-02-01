@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Feedbacks\FeedbacksCreateRequest;
+use App\Http\Requests\Admin\Feedbacks\FeedbacksEditRequest;
 use App\Models\Feedback;
 use App\Models\News;
 use App\QueryBuilders\CategoriesQueryBuilder;
 use App\QueryBuilders\FeedbacksQueryBuilder;
 use App\QueryBuilders\SourcesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,12 +45,8 @@ class FeedbackController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(FeedbacksCreateRequest $request): RedirectResponse
     {
-        $request->validate([
-            'author' => 'required',
-            'feedback' => 'required',
-        ]);
         $feedback = new Feedback($request->except('_token')); //News::create()
         if ($feedback->save()) {
             return redirect()->route('admin.feedbacks.index')->with('success', 'Feedback successfully added.');
@@ -90,7 +89,7 @@ class FeedbackController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Feedback $feedback):RedirectResponse
+    public function update(FeedbacksEditRequest $request, Feedback $feedback):RedirectResponse
     {
         $feedback=$feedback->fill($request->except('_token'));
         if ($feedback->save()){
@@ -106,8 +105,16 @@ class FeedbackController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Feedback $feedback): JsonResponse
     {
-        //
+        try{
+            $feedback->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage(), [$exception]);
+
+            return \response()->json('error', 400);
+        }
     }
 }

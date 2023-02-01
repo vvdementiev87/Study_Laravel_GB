@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -22,7 +23,7 @@ class NewsControllerTest extends TestCase
 
     public function testShowIdSuccessStatus():void
     {
-        $response = $this->get(route('news.show',['id'=>'5']));
+        $response = $this->get(route('news.show',['news'=>News::create()]));
 
         $response->assertStatus(200);
     }

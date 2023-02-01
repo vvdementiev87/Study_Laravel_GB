@@ -3,24 +3,25 @@
 namespace App\Http\Controllers;
 
 
+use App\QueryBuilders\CategoriesQueryBuilder;
 use App\QueryBuilders\NewsQueryBuilder;
 
 class NewsController extends Controller
 {
 
-    public function index(NewsQueryBuilder $newsQueryBuilder)
+    public function index(NewsQueryBuilder $newsQueryBuilder, CategoriesQueryBuilder $categoriesQueryBuilder)
     {
 
         return \view('news.index',
             [
-                'news' => $newsQueryBuilder->getNewsAllWithPagination()
+                'news' => $newsQueryBuilder->getNewsAllWithPagination(),
+                'categories' => $categoriesQueryBuilder->getCategoriesAll()
             ]);
     }
 
     public
-    function show(int $id, NewsQueryBuilder $newsQueryBuilder)
+    function show(int $id, NewsQueryBuilder $newsQueryBuilder, CategoriesQueryBuilder $categoriesQueryBuilder)
     {
-        $newsList = $newsQueryBuilder->getNewsById($id);
-        return \view('news.show', ['news' => $newsList]);
+        return \view('news.show', ['news' => $newsQueryBuilder->getNewsById($id)]);
     }
 }

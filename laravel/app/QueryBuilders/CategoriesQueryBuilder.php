@@ -25,6 +25,6 @@ private Builder $model;
     }
     public function getCategoriesById(int $id): Model|null
     {
-        return $this->model->find($id);
+        return $this->model->with('news')->find($id);
     }
 }

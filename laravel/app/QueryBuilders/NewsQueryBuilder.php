@@ -27,7 +27,7 @@ class NewsQueryBuilder extends QueryBuilder
 
     public function getNewsById(int $id): Model|null
     {
-        return $this->model->find($id);
+        return $this->model->with('categories')->find($id);
     }
 
 }

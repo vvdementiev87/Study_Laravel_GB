@@ -19,8 +19,6 @@ class CategoriesController extends Controller
         CategoriesQueryBuilder $categoriesQueryBuilder,
         NewsQueryBuilder       $newsQueryBuilder)
     {
-        $categoriesList = $categoriesQueryBuilder->getCategoriesById($id);
-        $newsList = $newsQueryBuilder->getNewsAll();
-        return \view('categories.show', ['category' => $categoriesList, 'news' => $newsList]);
+       return \view('categories.show', ['category' => $categoriesQueryBuilder->getCategoriesById($id)]);
     }
 }

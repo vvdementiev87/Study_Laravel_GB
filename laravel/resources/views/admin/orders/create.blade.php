@@ -16,20 +16,24 @@
             @csrf
             <div class="form-group">
                 <label for="name">Имя</label>
-                <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control">
+                <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror">
             </div>
+            @error('name') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="phone">Телефон</label>
-                <input type="tel" id="phone" name="phone" value="{{old('phone')}}" class="form-control">
+                <input type="tel" id="phone" name="phone" value="{{old('phone')}}" class="form-control @error('phone') is-invalid @enderror">
             </div>
+            @error('phone') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control">
+                <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror">
             </div>
+            @error('email') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="info">Информация</label>
-                <input type="text" id="info" name="info" value="{{old('info')}}" class="form-control">
+                <input type="text" id="info" name="info" value="{{old('info')}}" class="form-control @error('info') is-invalid @enderror">
             </div>
+            @error('info') <span class="text-danger">{{$message}}</span> @enderror
             <br>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>

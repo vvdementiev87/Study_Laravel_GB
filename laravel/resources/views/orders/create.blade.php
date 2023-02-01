@@ -70,7 +70,7 @@
             <h3 class="float-md-start mb-0">Новостной портал</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories') }}">Categories</a>
+                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories.index') }}">Categories</a>
                 <a class="nav-link fw-bold py-1 px-0" href="{{route('admin.admin.index') }}">Admin panel</a>
             </nav>
         </div>
@@ -79,29 +79,28 @@
     <main class="px-3">
         <h1>Заказ</h1>
         <div>
-            @if($errors->any())
-                @foreach($errors->all() as $error)
-                    <x-alert type="danger" :message=" $error "></x-alert>
-                @endforeach
-            @endif
             <form method="post" action="{{route('orders.store')}}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Имя</label>
-                    <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control">
+                    <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror">
                 </div>
+                @error('name') <span class="text-danger">{{$message}}</span> @enderror
                 <div class="form-group">
                     <label for="phone">Телефон</label>
-                    <input type="tel" id="phone" name="phone" value="{{old('phone')}}" class="form-control">
+                    <input type="tel" id="phone" name="phone" value="{{old('phone')}}" class="form-control @error('phone') is-invalid @enderror">
                 </div>
+                @error('phone') <span class="text-danger">{{$message}}</span> @enderror
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control">
+                    <input type="email" id="email" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror">
                 </div>
+                @error('email') <span class="text-danger">{{$message}}</span> @enderror
                 <div class="form-group">
                     <label for="info">Запрос</label>
-                    <textarea class="form-control" id="info" name="info">{{old('info')}}</textarea>
+                    <textarea class="form-control @error('info') is-invalid @enderror" id="info" name="info">{{old('info')}}</textarea>
                 </div>
+                @error('info') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <button type="submit" class="btn btn-success">Отправить</button>
             </form>

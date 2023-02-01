@@ -26,39 +26,46 @@
                     @endforeach
                 </select>
             </div>
+            @error('category_ids') <span class="text-danger ">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="title">Заголовок</label>
-                <input type="text" id="title" name="title" value="{{$news->title}}" class="form-control">
+                <input type="text" id="title" name="title" value="{{$news->title}}" class="form-control @error('title') is-invalid @enderror">
             </div>
+            @error('title') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="author">Автор</label>
-                <input type="text" id="author" name="author" value="{{$news->author}}" class="form-control">
+                <input type="text" id="author" name="author" value="{{$news->author}}" class="form-control @error('author') is-invalid @enderror">
             </div>
+            @error('author') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="description">Описание</label>
-                <textarea class="form-control" id="description" name="description">{!! $news->description !!}</textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{!! $news->description !!}</textarea>
             </div>
+            @error('description') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="status">Статус</label>
-                <select class="form-control" name="status" id="status">
+                <select class="form-control @error('status') is-invalid @enderror" name="status" id="status">
                     @foreach($statuses as $status)
                         <option @if($news->status === $status) selected @endif value="{{$status}}">{{$status}}</option>
                     @endforeach
                 </select>
             </div>
+            @error('status') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="source_id">Статус</label>
-                <select class="form-control" name="source_id" id="source_id">
+                <select class="form-control @error('source_id') is-invalid @enderror" name="source_id" id="source_id">
                     @foreach($sources as $source)
                         <option @if((int) $news->source_id === $source->id) selected
                                 @endif value="{{$source->id}}">{{$source->name}}</option>
                     @endforeach
                 </select>
             </div>
+            @error('source_id') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="image">Изображение</label>
-                <input type="file" class="form-control" id="image" name="image" value="{{$news->image}}"/>
+                <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{$news->image}}"/>
             </div>
+            @error('image') <span class="text-danger">{{$message}}</span> @enderror
             <br>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>

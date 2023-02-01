@@ -70,7 +70,7 @@
             <h3 class="float-md-start mb-0">Новостной портал</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories') }}">Categories</a>
+                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories.index') }}">Categories</a>
                 <a class="nav-link fw-bold py-1 px-0" href="{{route('admin.admin.index') }}">Admin panel</a>
             </nav>
         </div>
@@ -79,21 +79,18 @@
     <main class="px-3">
         <h1>Отзыв</h1>
         <div>
-            @if($errors->any())
-                @foreach($errors->all() as $error)
-                    <x-alert type="danger" :message=" $error "></x-alert>
-                @endforeach
-            @endif
             <form method="post" action="{{route('feedbacks.store')}}">
                 @csrf
                 <div class="form-group">
                     <label for="author">Автор</label>
-                    <input type="text" id="author" name="author" value="{{old('author')}}" class="form-control">
+                    <input type="text" id="author" name="author" value="{{old('author')}}" class="form-control @error('author') is-invalid @enderror">
                 </div>
+                @error('author') <span class="text-danger">{{$message}}</span> @enderror
                 <div class="form-group">
                     <label for="feedback">Отзыв</label>
-                    <textarea class="form-control" id="feedback" name="feedback">{{old('feedback')}}</textarea>
+                    <textarea class="form-control @error('feedback') is-invalid @enderror" id="feedback" name="feedback">{{old('feedback')}}</textarea>
                 </div>
+                @error('feedback') <span class="text-danger">{{$message}}</span> @enderror
                 <br>
                 <button type="submit" class="btn btn-success">Оставить отзыв</button>
             </form>

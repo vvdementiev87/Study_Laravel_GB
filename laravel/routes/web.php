@@ -26,20 +26,14 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController ;
 Route::get('/', static function () {
     return view('welcome');
 })->name('main');
-Route::resource('feedbacks', FeedbackController::class);
-Route::resource('orders', OrderController::class);
+
 
 Route::group(['prefix' => ''], static function () {
-    Route::get('/news/{id}/show', [NewsController::class, 'show'])->where('id', '\d+')->name('news.show');
-
-
-    Route::get('/news', [NewsController::class, 'index'])->name('news');
-
-    Route::get('/categories', [CategoriesController::class, 'index'])->name('categories');
-
-    Route::get('/categories/{id}/show', [CategoriesController::class, 'show'])->where('id', '\d+')->name('categories.show');
-
-});
+    Route::resource('feedbacks', FeedbackController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('news', NewsController::class);
+    Route::resource('categories',CategoriesController::class);
+    });
 
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], static function () {

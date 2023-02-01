@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Sources\SourcesCreateRequest;
+use App\Http\Requests\Admin\Sources\SourcesEditRequest;
 use App\Models\News;
 use App\Models\Source;
 use App\QueryBuilders\CategoriesQueryBuilder;
 use App\QueryBuilders\SourcesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -41,17 +44,14 @@ class SourceController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(SourcesCreateRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
         $source = new Source($request->except('_token')); //News::create()
         if ($source->save()) {
-            return redirect()->route('admin.sources.index')->with('success', 'ource successfully added.');
+            return redirect()->route('admin.sources.index')->with('success', 'Source successfully added.');
         }
 
-        return \back()->with('error','Source not added.');
+        return \back()->with('error', 'Source not added.');
     }
 
     /**
@@ -77,7 +77,7 @@ class SourceController extends Controller
     {
         return \view('admin.sources.edit',
             [
-                'source'=> $source
+                'source' => $source
             ]);
     }
 
@@ -88,14 +88,14 @@ class SourceController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Source $source):RedirectResponse
+    public function update(SourcesEditRequest $request, Source $source): RedirectResponse
     {
-        $source=$source->fill($request->except('_token'));
-        if ($source->save()){
+        $source = $source->fill($request->except('_token'));
+        if ($source->save()) {
             return redirect()->route('admin.sources.index')->with('success', 'Source successfully updated.');
         }
 
-        return \back()->with('error','ource not added.');
+        return \back()->with('error', 'ource not added.');
     }
 
     /**
@@ -104,8 +104,16 @@ class SourceController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Source $source): JsonResponse
     {
-        //
+        try {
+            $source->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage(), [$exception]);
+
+            return \response()->json('error', 400);
+        }
     }
 }

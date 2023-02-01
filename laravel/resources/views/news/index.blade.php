@@ -1,19 +1,10 @@
 @extends('layouts.main')
 @section('categories')
-    <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between">
-            <a class="p-2 link-secondary" href="#">World</a>
-            <a class="p-2 link-secondary" href="#">U.S.</a>
-            <a class="p-2 link-secondary" href="#">Technology</a>
-            <a class="p-2 link-secondary" href="#">Design</a>
-            <a class="p-2 link-secondary" href="#">Culture</a>
-            <a class="p-2 link-secondary" href="#">Business</a>
-            <a class="p-2 link-secondary" href="#">Politics</a>
-            <a class="p-2 link-secondary" href="#">Opinion</a>
-            <a class="p-2 link-secondary" href="#">Science</a>
-            <a class="p-2 link-secondary" href="#">Health</a>
-            <a class="p-2 link-secondary" href="#">Style</a>
-            <a class="p-2 link-secondary" href="#">Travel</a>
+    <div class="nav py-1 mb-2 align-items-center flex justify-content-center">
+        <nav class="nav d-flex flex-lg-wrap justify-content-center">
+            @foreach($categories as $category)
+                <a class="p-2 text-decoration-none link-secondary" href="{{route('categories.show',['category'=>$category])}}">{{$category->title}}</a>
+            @endforeach
         </nav>
     </div>
 @endsection
@@ -30,7 +21,7 @@
                         <div class="text-muted">{{$n->created_at}}</div>
                         </div>
                         <p class="mb-auto">{{$n->description}}</p>
-                        <a href="{{route('news.show', ['id'=>$n->id])}}" class="stretched-link">Продолжение ...</a>
+                        <a href="{{route('news.show', ['news'=>$n])}}" class="stretched-link">Продолжение ...</a>
                     </div>
                     <div class="col-auto d-none d-lg-block">
                         <svg class="bd-placeholder-img" width="200" height="300" xmlns="http://www.w3.org/2000/svg"
