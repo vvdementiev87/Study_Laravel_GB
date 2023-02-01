@@ -16,12 +16,14 @@
             @csrf
             <div class="form-group">
                 <label for="name">Название</label>
-                <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control">
+                <input type="text" id="name" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror">
             </div>
+            @error('name') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="source_url">URL</label>
-                <input type="url" id="source_url" name="source_url" value="{{old('source_url')}}" class="form-control">
+                <input type="url" id="source_url" name="source_url" value="{{old('source_url')}}" class="form-control @error('source_url') is-invalid @enderror">
             </div>
+            @error('source_url') <span class="text-danger">{{$message}}</span> @enderror
             <br>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>

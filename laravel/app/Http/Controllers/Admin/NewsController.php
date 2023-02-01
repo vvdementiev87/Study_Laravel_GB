@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\NewsStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\News\CreateRequest;
+use App\Http\Requests\Admin\News\EditRequest;
 use App\Models\News;
 use App\QueryBuilders\CategoriesQueryBuilder;
 use App\QueryBuilders\NewsQueryBuilder;
 use App\QueryBuilders\SourcesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class NewsController extends Controller
@@ -36,7 +38,7 @@ class NewsController extends Controller
             [
                 'categories' => $categoriesQueryBuilder->getCategoriesAll(),
                 'statuses' => NewsStatus::all(),
-                'sources'=>$sourcesQueryBuilder->getSourcesAll()
+                'sources' => $sourcesQueryBuilder->getSourcesAll()
             ]);
     }
 
@@ -46,17 +48,15 @@ class NewsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(CreateRequest $request): RedirectResponse
     {
-        $request->validate([
-            'title' => 'required',
-        ]);
-        $news = new News($request->except('_token','category_id')); //News::create()
-        if ($news->save()) {
+        $news = News::create($request->validated());
+        if ($news) {
+            $news->categories()->attach($request->getCategories());
             return redirect()->route('admin.news.index')->with('success', 'News successfully added.');
         }
 
-        return \back()->with('error','News not added.');
+        return \back()->with('error', 'News not added.');
     }
 
     /**
@@ -78,14 +78,14 @@ class NewsController extends Controller
      * @param SourcesQueryBuilder $sourcesQueryBuilder
      * @return Response
      */
-    public function edit(News $news, CategoriesQueryBuilder $categoriesQueryBuilder,SourcesQueryBuilder $sourcesQueryBuilder)
+    public function edit(News $news, CategoriesQueryBuilder $categoriesQueryBuilder, SourcesQueryBuilder $sourcesQueryBuilder)
     {
         return \view('admin.news.edit',
             [
-                'news'=> $news,
+                'news' => $news,
                 'categories' => $categoriesQueryBuilder->getCategoriesAll(),
                 'statuses' => NewsStatus::all(),
-                'sources'=>$sourcesQueryBuilder->getSourcesAll()
+                'sources' => $sourcesQueryBuilder->getSourcesAll()
             ]);
     }
 
@@ -96,15 +96,15 @@ class NewsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news):RedirectResponse
+    public function update(EditRequest $request, News $news): RedirectResponse
     {
-        $news=$news->fill($request->except('_token','category_ids'));
-        if ($news->save()){
-            $news->categories()->sync((array) $request->input('category_ids'));
-            return redirect()->route('admin.news.index')->with('success', 'News successfully updated.');
+        $news = $news->fill($request->validated());
+        if ($news->save()) {
+            $news->categories()->sync($request->getCategories());
+            return redirect()->route('admin.news.index')->with('success', trans('messages.admin.news.success'));
         }
 
-        return \back()->with('error','News not added.');
+        return \back()->with('error', trans('messages.admin.news.fail'));
     }
 
     /**
@@ -113,8 +113,16 @@ class NewsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(News $news): JsonResponse
     {
-        //
+        try{
+            $news->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage(), [$exception]);
+
+            return \response()->json('error', 400);
+        }
     }
 }

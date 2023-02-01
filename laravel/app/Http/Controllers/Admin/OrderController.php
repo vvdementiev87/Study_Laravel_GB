@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Orders\OrderCreateRequest;
+use App\Http\Requests\Admin\Orders\OrderEditRequest;
 use App\Models\News;
 use App\Models\Order;
 use App\Models\Source;
@@ -10,6 +12,7 @@ use App\QueryBuilders\CategoriesQueryBuilder;
 use App\QueryBuilders\OrdersQueryBuilder;
 use App\QueryBuilders\SourcesQueryBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,13 +45,8 @@ class OrderController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request): RedirectResponse
+    public function store(OrderCreateRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-        ]);
         $order = new Order($request->except('_token')); //News::create()
         if ($order->save()) {
             return redirect()->route('admin.orders.index')->with('success', 'Order successfully added.');
@@ -91,7 +89,7 @@ class OrderController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order):RedirectResponse
+    public function update(OrderEditRequest $request, Order $order):RedirectResponse
     {
         $order=$order->fill($request->except('_token'));
         if ($order->save()){
@@ -107,8 +105,16 @@ class OrderController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order): JsonResponse
     {
-        //
+        try {
+            $order->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage(), [$exception]);
+
+            return \response()->json('error', 400);
+        }
     }
 }

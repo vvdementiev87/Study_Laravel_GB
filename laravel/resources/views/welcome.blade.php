@@ -70,7 +70,7 @@
             <h3 class="float-md-start mb-0">Новостной портал</h3>
             <nav class="nav nav-masthead justify-content-center float-md-end">
                 <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories') }}">Categories</a>
+                <a class="nav-link fw-bold py-1 px-0" href="{{route('categories.index') }}">Categories</a>
                 <a class="nav-link fw-bold py-1 px-0" href="{{route('admin.admin.index') }}">Admin panel</a>
             </nav>
         </div>
@@ -80,7 +80,7 @@
         <h1>News Portal</h1>
         <p class="lead">Welcome on news portal</p>
         <p class="lead">
-            <a href="{{route('news') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">read news</a>
+            <a href="{{route('news.index') }}" class="btn btn-lg btn-light fw-bold border-white bg-white">read news</a>
         </p>
     </main>
 

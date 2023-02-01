@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\CategoriesCreateRequest;
+use App\Http\Requests\Admin\Categories\CategoriesEditRequest;
 use App\Models\Category;
+use App\Models\News;
 use App\QueryBuilders\CategoriesQueryBuilder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -38,11 +42,8 @@ class CategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesCreateRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
         return response()->json($request->only(['name']));
     }
 
@@ -78,7 +79,7 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category): RedirectResponse
+    public function update(CategoriesEditRequest $request, Category $category): RedirectResponse
     {
         $category = $category->fill($request->except('_token'));
         if ($category->save()) {
@@ -94,8 +95,16 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category): JsonResponse
     {
-        //
+        try{
+            $category->delete();
+
+            return \response()->json('ok');
+        } catch (\Exception $exception) {
+            \Log::error($exception->getMessage(), [$exception]);
+
+            return \response()->json('error', 400);
+        }
     }
 }

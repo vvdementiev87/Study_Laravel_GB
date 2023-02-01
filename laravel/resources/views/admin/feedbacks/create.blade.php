@@ -16,12 +16,14 @@
             @csrf
             <div class="form-group">
                 <label for="author">автор</label>
-                <input type="text" id="author" name="author" value="{{old('author')}}" class="form-control">
+                <input type="text" id="author" name="author" value="{{old('author')}}" class="form-control @error('author') is-invalid @enderror">
             </div>
+            @error('author') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="feedback">Отзыв</label>
-                <textarea class="form-control" id="feedback" name="feedback">{!! old('feedback') !!}</textarea>
+                <textarea class="form-control @error('feedback') is-invalid @enderror" id="feedback" name="feedback">{!! old('feedback') !!}</textarea>
             </div>
+            @error('feedback') <span class="text-danger">{{$message}}</span> @enderror
             <br>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>

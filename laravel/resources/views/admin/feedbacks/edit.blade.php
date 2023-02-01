@@ -18,12 +18,14 @@
             @method('PUT')
             <div class="form-group">
                 <label for="author">Автор</label>
-                <input type="text" id="author" name="author" value="{{$feedback->author}}" class="form-control">
+                <input type="text" id="author" name="author" value="{{$feedback->author}}" class="form-control @error('author') is-invalid @enderror">
             </div>
+            @error('author') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
                 <label for="feedback">Отзыв</label>
-                <textarea class="form-control" id="feedback" name="feedback">{!! $feedback->feedback !!}</textarea>
+                <textarea class="form-control @error('feedback') is-invalid @enderror" id="feedback" name="feedback">{!! $feedback->feedback !!}</textarea>
             </div>
+            @error('feedback') <span class="text-danger">{{$message}}</span> @enderror
             <br>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>

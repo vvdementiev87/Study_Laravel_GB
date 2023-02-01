@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('category_has_news', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('news_id')->references('id')->on('news');
-            $table->foreignId('category_id')->references('id')->on('categories');
+            $table->foreignId('news_id')->references('id')->on('news')->onDelete('cascade');;
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');;
             $table->timestamps();
         });
     }
