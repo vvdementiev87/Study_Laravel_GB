@@ -121,6 +121,7 @@
       <path value="$PROJECT_DIR$/laravel/vendor/phar-io/manifest" />
       <path value="$PROJECT_DIR$/laravel/vendor/laravel/dusk" />
       <path value="$PROJECT_DIR$/laravel/vendor/php-webdriver/webdriver" />
+      <path value="$PROJECT_DIR$/laravel/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

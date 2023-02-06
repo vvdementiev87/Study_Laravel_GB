@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link @if(request()->routeIs('admin.admin.index')) active @endif" aria-current="page" href="{{route('admin.admin.index')}}">
+                <a class="nav-link @if(request()->routeIs('admin.index')) active @endif" aria-current="page" href="{{route('admin.index')}}">
                     <span data-feather="home" class="align-text-bottom"></span>
                     Главная
                 </a>
@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link @if(request()->routeIs('admin.users.*')) active @endif" href="{{route('admin.users.index')}}">
                     <span data-feather="users" class="align-text-bottom"></span>
                     Пользователи
                 </a>
