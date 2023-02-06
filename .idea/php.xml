@@ -122,6 +122,7 @@
       <path value="$PROJECT_DIR$/laravel/vendor/laravel/dusk" />
       <path value="$PROJECT_DIR$/laravel/vendor/php-webdriver/webdriver" />
       <path value="$PROJECT_DIR$/laravel/vendor/laravel/ui" />
+      <path value="$PROJECT_DIR$/laravel/vendor/predis/predis" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

@@ -60,3 +60,5 @@ Route::group(['prefix' => ''], static function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/redis',[\App\Http\Controllers\Redis\RedisController::class,'index']);

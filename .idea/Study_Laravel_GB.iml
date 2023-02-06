@@ -119,6 +119,7 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/dusk" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/php-webdriver/webdriver" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/ui" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/predis/predis" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
