@@ -118,6 +118,7 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/dusk" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/php-webdriver/webdriver" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/ui" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
