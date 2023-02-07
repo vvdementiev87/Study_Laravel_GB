@@ -120,6 +120,8 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/php-webdriver/webdriver" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/ui" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/predis/predis" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/orchestra/parser" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravie/parser" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

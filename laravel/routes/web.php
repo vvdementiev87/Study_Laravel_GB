@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::resource('feedbacks', AdminFeedbackController::class);
         Route::resource('orders', AdminOrderController::class);
         Route::resource('users', AdminUserController::class);
+        Route::get('parse',\App\Http\Controllers\Admin\ParserController::class);
     });
 });
 
@@ -62,3 +63,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/redis',[\App\Http\Controllers\Redis\RedisController::class,'index']);
+
+
