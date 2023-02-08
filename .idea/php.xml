@@ -123,6 +123,13 @@
       <path value="$PROJECT_DIR$/laravel/vendor/php-webdriver/webdriver" />
       <path value="$PROJECT_DIR$/laravel/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/laravel/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/laravel/vendor/orchestra/parser" />
+      <path value="$PROJECT_DIR$/laravel/vendor/laravie/parser" />
+      <path value="$PROJECT_DIR$/laravel/vendor/league/oauth1-client" />
+      <path value="$PROJECT_DIR$/laravel/vendor/laravel/socialite" />
+      <path value="$PROJECT_DIR$/laravel/vendor/socialiteproviders/manager" />
+      <path value="$PROJECT_DIR$/laravel/vendor/socialiteproviders/vkontakte" />
+      <path value="$PROJECT_DIR$/laravel/vendor/socialiteproviders/github" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

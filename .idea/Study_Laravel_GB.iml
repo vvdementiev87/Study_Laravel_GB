@@ -120,6 +120,13 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/php-webdriver/webdriver" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/ui" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/predis/predis" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/orchestra/parser" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravie/parser" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/league/oauth1-client" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/socialite" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/socialiteproviders/manager" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/socialiteproviders/vkontakte" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/socialiteproviders/github" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

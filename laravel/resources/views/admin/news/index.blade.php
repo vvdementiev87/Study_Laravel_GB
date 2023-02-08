@@ -20,6 +20,7 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Author</th>
+                <th>Link</th>
                 <th>Status</th>
                 <th>Date</th>
                 <th>CRUD</th>
@@ -33,6 +34,7 @@
                     <td>{{$news->title}}</td>
                     <td>{{$news->description}}</td>
                     <td>{{$news->author}}</td>
+                    <td><a href="{{$news->link}}">read link</a></td>
                     <td>{{$news->status}}</td>
                     <td>{{$news->created_at}}</td>
                     <td>

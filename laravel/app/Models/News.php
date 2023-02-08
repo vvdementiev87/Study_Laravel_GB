@@ -17,7 +17,10 @@ class News extends Model
         'author',
         'status',
         'description',
-        'source_id'
+        'source_id',
+        'guid',
+        'link',
+        'pubDate'
     ];
 
     public function categories(): BelongsToMany
