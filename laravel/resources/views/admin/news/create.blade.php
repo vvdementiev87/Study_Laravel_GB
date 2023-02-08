@@ -30,6 +30,21 @@
             </div>
             @error('author') <span class="text-danger">{{$message}}</span> @enderror
             <div class="form-group">
+                <label for="link">Link</label>
+                <input type="text" id="link" name="link" value="{{old('link')}}" class="form-control @error('link') is-invalid @enderror">
+            </div>
+            @error('link') <span class="text-danger">{{$message}}</span> @enderror
+            <div class="form-group">
+                <label for="guid">guid</label>
+                <input type="text" id="guid" name="guid" value="{{old('guid')}}" class="form-control @error('guid') is-invalid @enderror">
+            </div>
+            @error('guid') <span class="text-danger">{{$message}}</span> @enderror
+            <div class="form-group">
+                <label for="pubDate">дата публикации</label>
+                <input type="text" id="pubDate" name="pubDate" value="{{old('pubDate')}}" class="form-control @error('pubDate') is-invalid @enderror">
+            </div>
+            @error('pubDate') <span class="text-danger">{{$message}}</span> @enderror
+            <div class="form-group">
                 <label for="author">Описание</label>
                 <textarea class="form-control" id="description" name="description">{{old('description')}}</textarea>
             </div>

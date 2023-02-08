@@ -64,4 +64,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/redis',[\App\Http\Controllers\Redis\RedisController::class,'index']);
 
+Route::group(['middleware'=>'guest'], function(){
+    Route::get('/auth/redirect/{driver}', [\App\Http\Controllers\SocialProvidersController::class, 'redirect'])->where('driver','\w+')->name('social.auth.redirect');
+    Route::get('/auth/callback/{driver}', [\App\Http\Controllers\SocialProvidersController::class, 'callback'])->where('driver','\w+');
+
+});
+
 

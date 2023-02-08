@@ -3,33 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\Contracts\Parser;
 use Illuminate\Http\Request;
-use Orchestra\Parser\Xml\Facade;
 
 class ParserController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, Parser $parser)
     {
-        $link = "https://news.rambler.ru/rss/photo/";
-        $xml = Facade::load($link);
-        $data = $xml->parse([
-            "title" => [
-                "uses" => "channel.title"
-            ],
-            "link" => [
-                "uses" => "channel.link"
-            ],
-            "description" => [
-                "uses" => "channel.description"
-            ],
-            "image" => [
-                "uses" => "channel.image.url"
-            ],
-            "news" => [
-                "uses" => "channel.item[title,link,guid,description,pubDate]"
-            ]
-        ]);
-
-        dd($data);
+        $load = $parser->setLink("https://news.rambler.ru/rss/photo/")->getParseData();
+        $parser->saveParseDataToDb();
+        dd($load['news']);
     }
 }
