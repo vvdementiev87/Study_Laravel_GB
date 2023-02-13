@@ -18,7 +18,7 @@
                 <h2 class="blog-post-title mb-1">{{$news->title}}</h2>
                 <p class="blog-post-meta">{{$news->created_at}} by <a href="#">{{$news->author}}</a></p>
 
-                <p>{{$news->description}}</p>
+                {!!$news->description!!}
             </article>
         </div>
         <div class="col-md-4">

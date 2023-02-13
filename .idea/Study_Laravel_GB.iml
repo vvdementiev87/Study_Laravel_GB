@@ -127,6 +127,9 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/socialiteproviders/manager" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/socialiteproviders/vkontakte" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/socialiteproviders/github" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/intervention/image" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/unisharp/laravel-filemanager" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/laravel/helpers" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -63,6 +63,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div class="container">
@@ -77,6 +78,7 @@
 
 </main>
 <x-footer text="Новостной портал"></x-footer>
+
 </body>
 </html>
 
