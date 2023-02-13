@@ -4,6 +4,10 @@
         class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Добавить источник</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
+            <a class="nav-link" href="{{route('admin.parse')}}">
+                <span data-feather="shopping-cart" class="align-text-bottom"></span>
+                Парсим новости
+            </a>
         </div>
         <a class="nav-link" href="{{route('admin.sources.create')}}">
             <span data-feather="shopping-cart" class="align-text-bottom"></span>

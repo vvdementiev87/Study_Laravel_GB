@@ -29,7 +29,7 @@ class EditRequest extends FormRequest
             'category_ids' => ['required', 'array'],
             'title' => ['required', 'string', 'min:2', 'max:200'],
             'author' => ['nullable', 'string', 'min:2', 'max:30'],
-            'description' => ['nullable', 'max:200'],
+            'description' => ['nullable'],
             'status' => [new Enum(NewsStatus::class)],
             'image' => ['sometimes'],
             'source_id' => ['nullable', 'numeric']

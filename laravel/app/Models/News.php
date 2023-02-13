@@ -20,7 +20,8 @@ class News extends Model
         'source_id',
         'guid',
         'link',
-        'pubDate'
+        'pubDate',
+        'image'
     ];
 
     public function categories(): BelongsToMany

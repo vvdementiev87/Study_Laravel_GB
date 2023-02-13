@@ -76,3 +76,17 @@
         </form>
     </div>
 @endsection
+@push('js')
+    @vite(['node_modules/ckeditor4/ckeditor.js'])
+    <script>
+        let options = {
+            filebrowserImageBrowseUrl: '/laravel-file-manager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-file-manager/upload?type=Images&_token={{csrf_token()}}',
+            filebrowserBrowseUrl: '/laravel-file-manager?type=Files',
+            filebrowserUploadUrl: '/laravel-file-manager/upload?type=Files&_token={{csrf_token()}}'
+        };
+        window.onload = function() {
+            CKEDITOR.replace( 'description', options );}
+    </script>
+
+@endpush

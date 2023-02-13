@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::resource('feedbacks', AdminFeedbackController::class);
         Route::resource('orders', AdminOrderController::class);
         Route::resource('users', AdminUserController::class);
-        Route::get('parse',\App\Http\Controllers\Admin\ParserController::class);
+        Route::get('parse',\App\Http\Controllers\Admin\ParserController::class)->name('parse');
     });
 });
 
@@ -68,6 +68,10 @@ Route::group(['middleware'=>'guest'], function(){
     Route::get('/auth/redirect/{driver}', [\App\Http\Controllers\SocialProvidersController::class, 'redirect'])->where('driver','\w+')->name('social.auth.redirect');
     Route::get('/auth/callback/{driver}', [\App\Http\Controllers\SocialProvidersController::class, 'callback'])->where('driver','\w+');
 
+});
+
+Route::group(['prefix' => 'laravel-file-manager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
 

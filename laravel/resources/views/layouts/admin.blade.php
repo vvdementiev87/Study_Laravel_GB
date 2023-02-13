@@ -67,7 +67,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/css/dashboard.css') }}" rel="stylesheet">
-</head>
+   </head>
 <body>
 
 <x-admin.header></x-admin.header>
@@ -87,6 +87,7 @@
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
         integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
 </script>
+
 @stack('js')
 </body>
 </html>
